@@ -1,6 +1,6 @@
 # Pokedex
 
-## is an react app inspired an electronic device from Pokemon series designed to catalogue and provide information regarding the various species of Pokémon featured in the Pokémon video game, anime and manga series.
+## is an react app inspired by an electronic device from Pokemon series designed to catalogue and provide information regarding the various species of Pokémon featured in the Pokémon video game, anime and manga series.
 
 ## Getting Started with Create React App
 
