@@ -1,9 +1,7 @@
-import * as React from 'react';
+import React, { useEffect } from 'react';
+import { Box } from '@material-ui/core';
 
 export default function Pokedex() {
-  return (
-    <div>
-      <h1>Hello Pokemon !</h1>
-    </div>
-  );
+  useEffect(() => {}, []);
+  return <Box></Box>;
 }
