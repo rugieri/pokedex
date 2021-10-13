@@ -1,11 +1,11 @@
-/* eslint-disable no-undef */
 import React, { useEffect, useState } from 'react';
-import { Box, CircularProgress } from '@material-ui/core';
+import { Grid, Box, CircularProgress } from '@material-ui/core';
 import axios from 'axios';
 import { IMAGE_API_URL, POKEMON_API_URL } from '../config';
+import PokemonCard from '../components/PokemonCard';
 
 export default function Pokedex() {
-  const [pokemonData, setPokemonData] = useState([null]);
+  const [pokemonData, setPokemonData] = useState(null);
   useEffect(() => {
     axios.get(POKEMON_API_URL + '?limit=800').then((response) => {
       if (response.status >= 200 && response.status < 300) {
@@ -27,9 +27,11 @@ export default function Pokedex() {
   return (
     <Box>
       {pokemonData ? (
-        pokemonData.map((pokemon) => {
-          return <h1>{pokemon.name}</h1>;
-        })
+        <Grid container spacing={2}>
+          {pokemonData.map((pokemon) => {
+            return <PokemonCard pokemon={pokemon} image={pokemon.url} />;
+          })}
+        </Grid>
       ) : (
         <CircularProgress style={{ marginTop: 100 }} />
       )}
