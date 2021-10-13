@@ -1,10 +1,18 @@
 import React, { useEffect, useState } from 'react';
-import { Grid, Box, CircularProgress } from '@material-ui/core';
+import { Grid, Box, CircularProgress, makeStyles } from '@material-ui/core';
 import axios from 'axios';
 import { IMAGE_API_URL, POKEMON_API_URL } from '../config';
 import PokemonCard from '../components/PokemonCard';
 
+const useStyles = makeStyles((theme) => ({
+  pokedexContainer: {
+    textAlign: 'center',
+    padding: '70px 10px 0px 10px',
+    backgroundColor: 'rgb(50, 50, 70)',
+  },
+}));
 export default function Pokedex() {
+  const classes = useStyles();
   const [pokemonData, setPokemonData] = useState(null);
   useEffect(() => {
     axios.get(POKEMON_API_URL + '?limit=800').then((response) => {
@@ -27,7 +35,7 @@ export default function Pokedex() {
   return (
     <Box>
       {pokemonData ? (
-        <Grid container spacing={2}>
+        <Grid className={classes.pokedexContainer} container spacing={2}>
           {pokemonData.map((pokemon) => {
             return <PokemonCard pokemon={pokemon} image={pokemon.url} />;
           })}

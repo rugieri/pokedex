@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: 'black',
     color: 'white',
     '&:hover': {
-      backgroundColor: 'rgb(90,90,90)',
+      backgroundColor: '#707090',
     },
   },
   cardMedia: {
