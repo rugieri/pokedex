@@ -25,6 +25,9 @@ const useStyles = makeStyles((theme) => ({
   CardContent: {
     textAlign: 'center',
   },
+  link: {
+    textDecoration: 'none',
+  },
 }));
 
 export default function PokemonCard(props) {
