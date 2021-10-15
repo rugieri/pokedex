@@ -68,7 +68,7 @@ class PokemonDetails extends Component {
     const { classes } = this.props;
     const { pokemon } = this.state;
     if (pokemon) {
-      const { name, sprites } = pokemon;
+      const { name, sprites, height, weight, types } = pokemon;
       return (
         <Box>
           <Box className={classes.pokedexContainer}>
@@ -90,6 +90,32 @@ class PokemonDetails extends Component {
                     <br />
                   </Typography>
                 </Grid>
+                <Grid item md={2}>
+                  <Typography className={classes.text}>
+                    Height
+                    <br />
+                    {height}m
+                  </Typography>
+                </Grid>
+                <Grid item md={2}>
+                  <Typography className={classes.text}>
+                    Weight
+                    <br />
+                    {weight}kg
+                  </Typography>
+                </Grid>
+                {types.map((pokemonType) => {
+                  const { name } = pokemonType.type;
+                  return (
+                    <Grid item md={2}>
+                      <Typography className={classes.text}>
+                        Type
+                        <br />
+                        {name}
+                      </Typography>
+                    </Grid>
+                  );
+                })}
               </Grid>
             </Box>
           </Box>
@@ -100,5 +126,9 @@ class PokemonDetails extends Component {
     }
   }
 }
+const mapStateToProps = (state) => ({});
 
-export default withStyles(styles)(PokemonDetails);
+const mapDispatchToProps = (dispatch) => ({});
+export default withStyles(styles)(
+  connect(mapStateToProps, mapDispatchToProps)(PokemonDetails)
+);
