@@ -1,25 +1,25 @@
-import { TOGGLE_FAVOURITE } from './actions';
+import { TOGGLE_FAVORITE } from './actions';
 
 const initialData = {
-  favourites: [],
+  favorites: [],
 };
 
 const pokemonReducer = (state = initialData, action) => {
   switch (action.type) {
-    case TOGGLE_FAVOURITE:
+    case TOGGLE_FAVORITE:
       let pokemon = action.payload;
-      let pokemonFromFavourite = state.favourites.find(
+      let pokemonFromFavorite = state.favorites.find(
         (favPokemon) => pokemon.id === favPokemon.id
       );
       return {
         ...state,
-        favourites: pokemonFromFavourite
+        favorites: pokemonFromFavorite
           ? [
-              ...state.favourites.filter(
-                (pokemon) => pokemon.id !== pokemonFromFavourite.id
+              ...state.favorites.filter(
+                (pokemon) => pokemon.id !== pokemonFromFavorite.id
               ),
             ]
-          : [...state.favourites, action.payload],
+          : [...state.favorites, action.payload],
       };
     default:
       return state;

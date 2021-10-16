@@ -1,6 +1,6 @@
-export const TOGGLE_FAVOURITE = 'TOGGLE_FAVOURITE';
+export const TOGGLE_FAVORITE = 'TOGGLE_FAVORITE';
 
-export const toggleFavourite = (pokemon) => ({
-  type: TOGGLE_FAVOURITE,
+export const toggleFavorite = (pokemon) => ({
+  type: TOGGLE_FAVORITE,
   payload: pokemon,
 });

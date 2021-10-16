@@ -37,7 +37,13 @@ export default function Pokedex() {
       {pokemonData ? (
         <Grid className={classes.pokedexContainer} container spacing={2}>
           {pokemonData.map((pokemon) => {
-            return <PokemonCard pokemon={pokemon} image={pokemon.url} />;
+            return (
+              <PokemonCard
+                pokemon={pokemon}
+                image={pokemon.url}
+                key={pokemon.id}
+              />
+            );
           })}
         </Grid>
       ) : (

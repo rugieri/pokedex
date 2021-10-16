@@ -2,14 +2,16 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { POKEMON_API_URL } from '../config';
 import {
-  Box,
   CircularProgress,
-  Grid,
+  Box,
   withStyles,
   Typography,
+  Grid,
   Button,
 } from '@material-ui/core';
-import { FavoriteIcon } from '@material-ui/icons/Favorite';
+import FavoriteIcon from '@material-ui/icons/Favorite';
+import { connect } from 'react-redux';
+import { toggleFavorite } from '../redux/actions';
 
 const styles = (theme) => ({
   pokedexContainer: {
@@ -29,12 +31,12 @@ const styles = (theme) => ({
     width: '170px',
     height: '170px',
   },
-  pokedexInfoContainer: {
+  pokemonInfoContainer: {
     bottom: 60,
     position: 'absolute',
     width: '100%',
   },
-  separator: {
+  seperator: {
     height: '0.01mm',
     width: '95%',
   },
@@ -47,6 +49,7 @@ const styles = (theme) => ({
     fontSize: 30,
   },
 });
+
 class PokemonDetails extends Component {
   constructor(props) {
     super(props);
@@ -54,6 +57,7 @@ class PokemonDetails extends Component {
       pokemon: null,
     };
   }
+
   componentDidMount() {
     const { match } = this.props;
     const { id } = match?.params;
@@ -64,6 +68,15 @@ class PokemonDetails extends Component {
     });
   }
 
+  favoriteChecker(pokemon) {
+    let found = false;
+    this.props.favorites?.map((p) => {
+      if (p.id === pokemon.id) {
+        found = true;
+      }
+    });
+    return found;
+  }
   render() {
     const { classes } = this.props;
     const { pokemon } = this.state;
@@ -75,19 +88,33 @@ class PokemonDetails extends Component {
             <Typography className={classes.textTitle} variant="h1">
               {name}
             </Typography>
-            <img className={classes.pokemonImage} src={sprites.front_default} />
-            <Box className={classes.pokedexInfoContainer}>
-              <hr className={classes.separator} />
+            <img
+              className={classes.pokemonImage}
+              src={sprites.front_default}
+              aria-hidden
+              alt="pokemon images"
+            />
+            <Box className={classes.pokemonInfoContainer}>
+              <hr className={classes.seperator} />
               <Grid container>
                 <Grid item md={1}>
-                  <Button className={classes.favorite}>
-                    <FavoriteIcon style={{ color: 'white', fontSize: 40 }} />
+                  <Button
+                    className={classes.favorite}
+                    onClick={() => this.props.toggleFavorite(pokemon)}
+                  >
+                    <FavoriteIcon
+                      style={{
+                        color: this.favoriteChecker(pokemon) ? 'red' : 'white',
+                        fontSize: 50,
+                      }}
+                    />
                   </Button>
                 </Grid>
                 <Grid item md={2}>
                   <Typography className={classes.text}>
                     Name
                     <br />
+                    {name}
                   </Typography>
                 </Grid>
                 <Grid item md={2}>
@@ -126,9 +153,15 @@ class PokemonDetails extends Component {
     }
   }
 }
-const mapStateToProps = (state) => ({});
 
-const mapDispatchToProps = (dispatch) => ({});
+const mapStateToProps = (state) => ({
+  favorites: state.favorites,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  toggleFavorite: (pokemon) => dispatch(toggleFavorite(pokemon)),
+});
+
 export default withStyles(styles)(
   connect(mapStateToProps, mapDispatchToProps)(PokemonDetails)
 );
