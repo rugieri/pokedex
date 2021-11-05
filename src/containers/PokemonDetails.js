@@ -51,12 +51,7 @@ const styles = (theme) => ({
 });
 
 class PokemonDetails extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      pokemon: null,
-    };
-  }
+  state = { pokemon: null };
 
   componentDidMount() {
     const { match } = this.props;
